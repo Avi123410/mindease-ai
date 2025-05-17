@@ -1,24 +1,46 @@
 # mindease-ai
 AI mental health chatbot detecting crisis signals with 92% accuracy. 
-**Real-time crisis detection** | 🤖 **Privacy-first AI** | 💬 **Human counselor handoff**  
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MindEase Mock</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+    .chat { background: #f5f5f5; border-radius: 10px; padding: 15px; height: 300px; overflow-y: auto; }
+    .user { color: #0066cc; margin: 5px 0; }
+    .bot { color: #333; margin: 5px 0; }
+    .risk { color: white; background: #ff4444; padding: 3px 8px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="chat" id="chat">
+    <div class="bot">MindEase: Hi, I'm here to listen. What's on your mind?</div>
+  </div>
+  <input type="text" id="msg" placeholder="Type a message..." autofocus>
+  <button onclick="sendMsg()">Send</button>
 
-<img src="assets/demo.gif" width="500" alt="MindEase detecting high-risk message">  
-
-## 🔍 Why MindEase?  
-- 70% of crisis signs go unreported due to stigma  
-- Our **fine-tuned RoBERTa model** detects distress with **92% accuracy**  
-- **Zero stored data** – end-to-end encrypted conversations  
-
-## 🛠️ Tech Stack  
-- **AI**: Python, PyTorch, HuggingFace Transformers  
-- **Backend**: Flask, Firebase Realtime DB  
-- **Frontend**: React (PWA), Material-UI  
-- **APIs**: Twilio, Crisis Text Line  
-
-## 🚀 Quick Start  
-```bash
-git clone https://github.com/yourusername/mindease-ai  
-cd mindease-ai  
-pip install -r backend/requirements.txt  
-npm install --prefix frontend  
-flask run --port 5000 & npm start --prefix frontend  
+  <script>
+    function sendMsg() {
+      const msg = document.getElementById("msg").value;
+      const chat = document.getElementById("chat");
+      
+      // User message
+      chat.innerHTML += `<div class="user">You: ${msg}</div>`;
+      
+      // Simulate AI analysis
+      setTimeout(() => {
+        if (msg.toLowerCase().includes("can't cope")) {
+          chat.innerHTML += `
+            <div class="bot">MindEase: <span class="risk">High risk detected (91%)</span></div>
+            <div class="bot">Connecting you to a counselor...</div>
+          `;
+        } else {
+          chat.innerHTML += `<div class="bot">MindEase: I hear you. Want to share more?</div>`;
+        }
+      }, 800);
+      
+      document.getElementById("msg").value = "";
+    }
+  </script>
+</body>
+</html>
